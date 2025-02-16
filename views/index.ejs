@@ -1,0 +1,13 @@
+<head>
+    <!-- <link rel="stylesheet" href="/style.css" /> -->
+</head>
+
+<html>
+    <body>
+        <% messages.forEach(function(message) { %>
+        <p><%= message.text %></p>
+        <p><%= message.user %></p>
+        <p><%= message.added %></p>
+        <% }) %>
+    </body>
+</html>
