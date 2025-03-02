@@ -1,28 +1,20 @@
-const express = require("express");
+const express = require('express');
 const path = require("node:path");
+let dotenv = require('dotenv').config()
+const homeRoute = require('./routes/index')
+const newRoute = require('./routes/newRoute')
+
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 
-const assetsPath = path.join(__dirname, "public");
-app.use(express.static(assetsPath));
 
-// app.use(express.urlencoded({ extended: true }));
-
-const newRoute = require('./routes/new')
-const indexRouter = require('./routes/index')
-app.use("/new", newRoute)
-app.use("/", indexRouter)
-
-
-
-// Template engine
+// template engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use('/', homeRoute)
+app.use('/new', newRoute)
 
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`My first Express app - listening on port ${PORT}!`);
-});
-
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
